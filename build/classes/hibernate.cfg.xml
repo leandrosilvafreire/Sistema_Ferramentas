@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+
+		<!-- configurações da conexão -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/db_ferramentas</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">l3@ndr0</property>
+
+		<!-- poll de conexões jdbc -->
+		<property name="connection.pool_size">1</property>
+
+		<!-- dialeto SQL -->
+		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+
+		<!-- gerenciamento da sessão -->
+		<property name="current_session_context_class">thread</property>
+
+		<!-- desabilita a cache -->
+		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+		<!-- exibir os comandos SQL -->
+		<property name="show_sql">true</property>
+
+		<!-- criação das tabelas -->
+		<property name="hbm2ddl.auto">validate</property>
+
+		<property name="format_sql">true</property>
+
+		<mapping class="br.com.ferramentas.domain.Fornecedor" />
+		<mapping class="br.com.ferramentas.domain.Funcionario" />
+		<mapping class="br.com.ferramentas.domain.Produto" />
+		<mapping class="br.com.ferramentas.domain.Venda" />
+		<mapping class="br.com.ferramentas.domain.Item" />
+
+
+
+
+
+	</session-factory>
+
+</hibernate-configuration>
+    

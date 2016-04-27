@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="foracao" value="#{fornecedorBean.acao}" />
+			<f:viewParam name="forcodigo" value="#{fornecedorBean.codigo}" />
+			<f:event listener="#{fornecedorBean.consultarFornecedor}"
+				type="preRenderView" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<p:messages id="messages" closable="true" />
+		<h:form id="frmForCad">
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Fornecedores" />
+				</f:facet>
+			</p:toolbar>
+
+			<h:panelGrid id="pnlForCad" columns="2">
+				<p:outputLabel value="Código " />
+				<p:inputText size="10" readonly="true"
+					value="#{fornecedorBean.fornecedorCadastro.codigo}" />
+
+				<p:outputLabel value="Nome " />
+				<p:inputText maxlength="50" size="30"
+					value="#{fornecedorBean.fornecedorCadastro.nome}"
+					readonly="#{fornecedorBean.acao == 'Excluir'}">
+					<f:validateBean />
+				</p:inputText>
+
+				<p:outputLabel value="CNPJ " />
+				<p:inputMask mask="99.999.999/9999-99" size="25"
+					value="#{fornecedorBean.fornecedorCadastro.cnpj}"
+					readonly="#{fornecedorBean.acao == 'Excluir'}">
+					<f:validateBean />
+
+				</p:inputMask>
+
+			</h:panelGrid>
+			<h:panelGrid columns="5">
+				<p:commandButton value="Cancelar"
+					actionListener="#{fornecedorBean.novo}"
+					update=":frmForCad:pnlForCad"
+					rendered="#{fornecedorBean.acao == 'Novo'}" />
+				<p:commandButton value="Salvar"
+					actionListener="#{fornecedorBean.salvar}"
+					update=":messages :frmForCad:pnlForCad"
+					rendered="#{fornecedorBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Editar"
+					actionListener="#{fornecedorBean.editar}" update=":messages"
+					rendered="#{fornecedorBean.acao == 'Editar'}" />
+				<p:commandButton value="Excluir"
+					actionListener="#{fornecedorBean.excluir}" update=":messages"
+					rendered="#{fornecedorBean.acao == 'Excluir'}" />
+
+				<p:button value="Voltar" outcome="/paginas/fornecedorLista.xhtml" />
+			</h:panelGrid>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>
