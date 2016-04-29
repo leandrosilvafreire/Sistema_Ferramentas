@@ -24,7 +24,7 @@ public class Fornecedor {
 	private Long codigo;
 
 	@NotEmpty(message = "O campo nome é obrigatório!")
-	@Size(min = 2, max = 50, message = "Informe um nome válido!")
+	@Size(min = 2, max = 50, message = "Informe um nome válido para o campo nome!")
 	@Column(name = "for_nome", length = 50, nullable = false)
 	private String nome;
 
@@ -61,5 +61,32 @@ public class Fornecedor {
 	public String toString() {
 		return "Fornecedor [codigo=" + codigo + ", nome=" + nome + ", cnpj=" + cnpj + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Fornecedor other = (Fornecedor) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
+	}
+	
+	
 
 }

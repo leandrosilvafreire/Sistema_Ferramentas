@@ -10,7 +10,7 @@ import br.com.ferramentas.util.FacesUtil;
 
 @ManagedBean
 @ViewScoped
-public class funcionarioBean {
+public class FuncionarioBean {
 
 	private Funcionario funcionarioCadastro;
 	private List<Funcionario> funcionarioLista;
