@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{vendaBean.carregarPecas}" type="preRenderView" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmVenCad">
+
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Vendas" />
+				</f:facet>
+			</p:toolbar>
+
+			<p:separator />
+
+			<p:dataTable emptyMessage="Nenhum registro encontrado"
+				value="#{vendaBean.produtoLista}"
+				filteredValue="#{vendaBean.produtoListaConsulta}" var="produto"
+				rows="4" paginator="true">
+
+				<p:column headerText="Nome" filterBy="#{produto.nome}"
+					sortBy="#{produto.nome}">
+					<h:outputText value="#{produto.nome}" />
+				</p:column>
+
+				<p:column headerText="Preço" sortBy="#{produto.preco}"
+					style="width: 8%">
+					<h:outputText value="#{produto.preco}" />
+				</p:column>
+
+				<p:column headerText="Quantidade" style="width: 8%">
+					<h:outputText value="#{produto.quantidade}" />
+				</p:column>
+
+				<p:column headerText="Fornecedor"
+					filterBy="#{produto.fornecedor.nome}"
+					sortBy="#{produto.fornecedor.nome}">
+					<h:outputText value="#{produto.fornecedor.nome}" />
+				</p:column>
+
+				<p:column headerText="Opções" style="width: 8%">
+					<p:commandButton value="Adicionar"
+						actionListener="#{vendaBean.adicionarPeca(produto)}"
+						update=":frmVenCad:tblItens" />
+				</p:column>
+
+			</p:dataTable>
+
+			<p:separator />
+
+			<p:dataTable id="tblItens" emptyMessage="Nenhum registro encontrado"
+				value="#{vendaBean.itensLista}" var="item" rows="4" paginator="true">
+
+				<p:column headerText="Produto">
+					<h:outputText value="#{item.produto.nome}" />
+				</p:column>
+
+				<p:column headerText="Quantidade">
+					<h:outputText value="#{item.quantidade}" />
+				</p:column>
+
+				<p:column headerText="Valor Parcial">
+					<h:outputText value="#{item.valorParcial}" />
+				</p:column>
+
+				<p:column headerText="Opções">
+					<p:commandButton value="Remover" />
+				</p:column>
+
+			</p:dataTable>
+
+
+
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>
