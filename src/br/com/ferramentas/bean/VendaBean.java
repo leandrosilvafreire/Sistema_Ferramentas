@@ -1,5 +1,6 @@
 package br.com.ferramentas.bean;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,12 +60,53 @@ public class VendaBean {
 	}
 
 	public void adicionarPeca(Produto produto) {
+
+		int posicaoSelecionada = -1;
+
+		for (int posicao = 0; posicao < itensLista.size() && posicaoSelecionada < 0; posicao++) {
+
+			Item itemCorrente = itensLista.get(posicao);
+
+			if (itemCorrente.getProduto().equals(produto)) {
+
+				posicaoSelecionada = posicao;
+
+			}
+
+		}
+
 		Item item = new Item();
 		item.setProduto(produto);
-		item.setQuantidade(1);
-		item.setValorParcial(produto.getPreco());
 
-		itensLista.add(item);
+		if (posicaoSelecionada < 0) {
+			item.setQuantidade(1);
+			item.setValorParcial(produto.getPreco());
+			itensLista.add(item);
+		} else {
+			Item itemCorrente = itensLista.get(posicaoSelecionada);
+			item.setQuantidade(itemCorrente.getQuantidade() + 1);
+			item.setValorParcial(produto.getPreco().multiply(new BigDecimal(item.getQuantidade())));
+			itensLista.set(posicaoSelecionada, item);
+		}
+
+	}
+
+	public void removerPeca(Item item) {
+		int posicaoSelecionada = -1;
+
+		for (int posicao = 0; posicao < itensLista.size() && posicaoSelecionada < 0; posicao++) {
+			Item itemCorrente = itensLista.get(posicao);
+
+			if (itemCorrente.getProduto().equals(item.getProduto())) {
+				posicaoSelecionada = posicao;
+
+			}
+
+		}
+		if (posicaoSelecionada > -1) {
+			itensLista.remove(posicaoSelecionada);
+
+		}
 
 	}
 

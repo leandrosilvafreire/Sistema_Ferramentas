@@ -75,7 +75,9 @@
 				</p:column>
 
 				<p:column headerText="Opções">
-					<p:commandButton value="Remover" />
+					<p:commandButton value="Remover"
+						actionListener="#{vendaBean.removerPeca(item)}"
+						update=":frmVenCad:tblItens" />
 				</p:column>
 
 			</p:dataTable>
