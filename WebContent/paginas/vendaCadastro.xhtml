@@ -14,6 +14,9 @@
 	</ui:define>
 
 	<ui:define name="conteudo">
+
+		<p:messages id="messages" closable="true" />
+
 		<h:form id="frmVenCad">
 
 			<p:toolbar>
@@ -52,7 +55,7 @@
 				<p:column headerText="Opções" style="width: 8%">
 					<p:commandButton value="Adicionar"
 						actionListener="#{vendaBean.adicionarPeca(produto)}"
-						update=":frmVenCad:tblItens" />
+						update=":frmVenCad:tblItens :frmVenCad:txtTotal" />
 				</p:column>
 
 			</p:dataTable>
@@ -77,15 +80,54 @@
 				<p:column headerText="Opções">
 					<p:commandButton value="Remover"
 						actionListener="#{vendaBean.removerPeca(item)}"
-						update=":frmVenCad:tblItens" />
+						update=":frmVenCad:tblItens :frmVenCad:txtTotal" />
 				</p:column>
 
 			</p:dataTable>
+
+			<p:separator />
+			<h:panelGrid columns="1">
+				<h:outputText id="txtTotal"
+					value="Valor Total: R$ #{vendaBean.vendaCadastro.valorTotal}" />
+				<p:commandButton value="Registrar Venda"
+					actionListener="#{vendaBean.carregarVenda}"
+					oncomplete="PF('dlgFimVenda').show()"
+					update=":frmFimVenda:pnlFimVenda" />
+			</h:panelGrid>
 
 
 
 
 		</h:form>
+
+		<p:dialog closable="true" draggable="true" modal="true"
+			resizable="false" header="Vendas" widgetVar="dlgFimVenda"
+			appendTo="@(body)">
+			<h:form id="frmFimVenda">
+				<h:panelGrid id="pnlFimVenda" columns="2">
+					<h:outputText value="Horário: " />
+					<h:outputText value="#{vendaBean.vendaCadastro.horario}">
+						<f:convertDateTime pattern="HH:mm dd/MM/YYYY"
+							timeZone="America/Sao_Paulo" />
+					</h:outputText>
+
+					<h:outputText value="Funcionário: " />
+					<h:outputText value="#{vendaBean.vendaCadastro.funcionario.nome}" />
+
+
+					<h:outputText value="Valor Total: " />
+					<h:outputText value="#{vendaBean.vendaCadastro.valorTotal}" />
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Registrar"
+						actionListener="#{vendaBean.salvarVenda}"
+						update=":messages :frmVenCad:tblItens :frmVenCad:txtTotal"
+						oncomplete="PF('dlgFimVenda').hide();" />
+					<p:commandButton value="Voltar" onclick="PF('dlgFimVenda').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
 	</ui:define>
 
 </ui:composition>

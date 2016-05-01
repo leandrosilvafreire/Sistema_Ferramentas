@@ -27,13 +27,12 @@
 				</f:facet>
 			</p:toolbar>
 
+
+
 			<h:panelGrid id="pnlFunCad" columns="2">
 
 
-				<p:outputLabel value="Código " />
-				<p:inputText size="10" readonly="true"
-					value="#{funcionarioBean.funcionarioCadastro.codigo}" />
-
+				
 				<p:outputLabel value="Nome " />
 				<p:inputText maxlength="50" size="30"
 					value="#{funcionarioBean.funcionarioCadastro.nome}"
@@ -70,15 +69,16 @@
 
 
 			</h:panelGrid>
+
 			<h:panelGrid columns="5">
 				<p:commandButton value="Cancelar"
 					actionListener="#{funcionarioBean.novo}"
 					update=":frmFunCad:pnlFunCad"
-					rendered="#{funcionarioBean.acao == 'Novo'}" />
+					rendered="#{funcionarioBean.acao != 'Editar' and funcionarioBean.acao != 'Excluir'}" />
 				<p:commandButton value="Salvar"
 					actionListener="#{funcionarioBean.salvar}"
 					update=":messages :frmFunCad:pnlFunCad"
-					rendered="#{funcionarioBean.acao == 'Novo'}" />
+					rendered="#{funcionarioBean.acao != 'Editar' and funcionarioBean.acao != 'Excluir'}" />
 
 				<p:commandButton value="Editar"
 					actionListener="#{funcionarioBean.editar}" update=":messages"
@@ -87,10 +87,11 @@
 					actionListener="#{funcionarioBean.excluir}" update=":messages"
 					rendered="#{funcionarioBean.acao == 'Excluir'}" />
 
-				<p:button value="Voltar" outcome="/paginas/funcionarioLista.xhtml" />
+				<p:button value="Listar" outcome="/paginas/funcionarioLista.xhtml" />
 			</h:panelGrid>
 
 		</h:form>
 	</ui:define>
 </ui:composition>
+
 </html>

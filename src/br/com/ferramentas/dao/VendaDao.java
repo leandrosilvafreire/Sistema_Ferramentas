@@ -10,13 +10,14 @@ import br.com.ferramentas.util.HibernateUtil;
 
 public class VendaDao {
 
-	public void salvar(Venda venda) {
+	public Long salvar(Venda venda) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao = null;
+		Long codigo = null;
 
 		try {
 			transacao = sessao.beginTransaction();
-			sessao.save(venda);
+			codigo = (Long) sessao.save(venda);
 			transacao.commit();
 		} catch (RuntimeException ex) {
 			if (transacao != null) {
@@ -26,6 +27,7 @@ public class VendaDao {
 		} finally {
 			sessao.close();
 		}
+		return codigo;
 
 	}
 

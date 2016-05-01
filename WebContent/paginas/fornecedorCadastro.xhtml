@@ -28,9 +28,6 @@
 			</p:toolbar>
 
 			<h:panelGrid id="pnlForCad" columns="2">
-				<p:outputLabel value="Código " />
-				<p:inputText size="10" readonly="true"
-					value="#{fornecedorBean.fornecedorCadastro.codigo}" />
 
 				<p:outputLabel value="Nome " />
 				<p:inputText maxlength="50" size="30"
@@ -52,11 +49,11 @@
 				<p:commandButton value="Cancelar"
 					actionListener="#{fornecedorBean.novo}"
 					update=":frmForCad:pnlForCad"
-					rendered="#{fornecedorBean.acao == 'Novo'}" />
+					rendered="#{fornecedorBean.acao != 'Editar' and fornecedorBean.acao != 'Excluir'}" />
 				<p:commandButton value="Salvar"
 					actionListener="#{fornecedorBean.salvar}"
 					update=":messages :frmForCad:pnlForCad"
-					rendered="#{fornecedorBean.acao == 'Novo'}" />
+					rendered="#{fornecedorBean.acao != 'Editar' and fornecedorBean.acao != 'Excluir'}" />
 
 				<p:commandButton value="Editar"
 					actionListener="#{fornecedorBean.editar}" update=":messages"
@@ -65,7 +62,7 @@
 					actionListener="#{fornecedorBean.excluir}" update=":messages"
 					rendered="#{fornecedorBean.acao == 'Excluir'}" />
 
-				<p:button value="Voltar" outcome="/paginas/fornecedorLista.xhtml" />
+				<p:button value="Listar" outcome="/paginas/fornecedorLista.xhtml" />
 			</h:panelGrid>
 
 		</h:form>

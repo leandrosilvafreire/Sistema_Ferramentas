@@ -39,25 +39,23 @@
 					</p:button>
 				</f:facet>
 
-				<p:column headerText="Código">
-					<h:outputText value="#{fornecedor.codigo}" />
-				</p:column>
+				
 
 				<p:column headerText="Nome" filterBy="#{fornecedor.nome}"
 					sortBy="#{forne.nome}">
 					<h:outputText value="#{fornecedor.nome}" />
 				</p:column>
 
-				<p:column headerText="CNPJ">
+				<p:column headerText="CNPJ" style="width: 15%">
 					<h:outputText value="#{fornecedor.cnpj}" />
 				</p:column>
 
-				<p:column headerText="Opções">
+				<p:column headerText="Opções" style="width: 14%">
 					<p:button value="Editar"
 						outcome="/paginas/fornecedorCadastro.xhtml">
 						<f:param name="forcodigo" value="#{fornecedor.codigo}" />
 						<f:param name="foracao" value="Editar" />
-					</p:button>
+					</p:button>&nbsp;
 					<p:button value="Excluir"
 						outcome="/paginas/fornecedorCadastro.xhtml">
 						<f:param name="forcodigo" value="#{fornecedor.codigo}" />

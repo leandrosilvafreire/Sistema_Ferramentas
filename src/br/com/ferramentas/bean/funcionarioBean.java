@@ -8,7 +8,7 @@ import br.com.ferramentas.dao.FuncionarioDao;
 import br.com.ferramentas.domain.Funcionario;
 import br.com.ferramentas.util.FacesUtil;
 
-@ManagedBean
+@ManagedBean(name = "funcionarioBean")
 @ViewScoped
 public class FuncionarioBean {
 

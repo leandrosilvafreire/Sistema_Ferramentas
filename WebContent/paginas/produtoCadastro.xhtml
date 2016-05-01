@@ -29,9 +29,7 @@
 
 			<h:panelGrid id="pnlProCad" columns="2">
 
-				<p:outputLabel value="Código" />
-				<p:inputText size="10" value="#{produtoBean.produtoCadastro.codigo}"
-					readonly="true" />
+				
 
 				<p:outputLabel value="Nome " />
 				<p:inputText maxlength="50" size="30"
@@ -55,7 +53,8 @@
 
 				<p:outputLabel value="Fornecedor" />
 				<p:selectOneMenu value="#{produtoBean.produtoCadastro.fornecedor}"
-					converter="fornecedorConverter">
+					converter="fornecedorConverter"
+					disabled="#{produtoBean.acao=='Excluir'}">
 					<f:selectItem itemValue="" itemLabel="Selecione um Fornecedor" />
 					<f:selectItems value="#{produtoBean.listaFornecedor}"
 						var="fornecedor" itemValue="#{fornecedor}"
@@ -68,12 +67,12 @@
 			<h:panelGrid columns="5">
 				<p:commandButton value="Cancelar"
 					actionListener="#{produtoBean.novo}" update=":frmProCad:pnlProCad"
-					rendered="#{produtoBean.acao=='Novo'}" />
+					rendered="#{produtoBean.acao != 'Editar' and produtoBean.acao != 'Excluir'}" />
 
 				<p:commandButton value="Salvar"
 					actionListener="#{produtoBean.salvarPro}"
 					update=":messages :frmProCad:pnlProCad"
-					rendered="#{produtoBean.acao=='Novo'}" />
+					rendered="#{produtoBean.acao != 'Editar' and produtoBean.acao != 'Excluir'}" />
 
 				<p:commandButton value="Editar"
 					actionListener="#{produtoBean.editarPro}" update=":messages"

@@ -44,21 +44,21 @@
 					<h:outputText value="#{funcionario.nome}" />
 				</p:column>
 
-				<p:column headerText="CPF">
+				<p:column headerText="CPF" style="width: 14%">
 					<h:outputText value="#{funcionario.cpf}" />
 				</p:column>
 
-				<p:column headerText="CNPJ" filterBy="#{funcionario.funcao}"
-					sortBy="#{funcionario.funcao}">
+				<p:column headerText="Função" filterBy="#{funcionario.funcao}"
+					sortBy="#{funcionario.funcao}" style="width: 14%">
 					<h:outputText value="#{funcionario.funcao}" />
 				</p:column>
 
-				<p:column headerText="Opções">
+				<p:column headerText="Opções" style="width: 14%">
 					<p:button value="Editar"
 						outcome="/paginas/funcionarioCadastro.xhtml">
 						<f:param name="funcodigo" value="#{funcionario.codigo}" />
 						<f:param name="funacao" value="Editar" />
-					</p:button>
+					</p:button>&nbsp;
 					<p:button value="Excluir"
 						outcome="/paginas/funcionarioCadastro.xhtml">
 						<f:param name="funcodigo" value="#{funcionario.codigo}" />
