@@ -14,7 +14,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name = "tb_funcionario")
 @NamedQueries({ @NamedQuery(name = "Funcionario.listar", query = "select funcionario from Funcionario funcionario"),
-		@NamedQuery(name = "Funcionario.buscarPorCodigo", query = "select funcionario from Funcionario funcionario where funcionario.codigo = :codigo") })
+		@NamedQuery(name = "Funcionario.buscarPorCodigo", query = "select funcionario from Funcionario funcionario where funcionario.codigo = :codigo"),
+		@NamedQuery(name = "Funcionario.logar", query = "select funcionario from Funcionario funcionario where funcionario.cpf = :cpf and funcionario.senha = :senha") })
+
 public class Funcionario {
 
 	@Id
@@ -111,7 +113,5 @@ public class Funcionario {
 			return false;
 		return true;
 	}
-	
-	
 
 }

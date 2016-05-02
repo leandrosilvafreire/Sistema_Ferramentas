@@ -49,18 +49,18 @@
 				<p:commandButton value="Cancelar"
 					actionListener="#{fornecedorBean.novo}"
 					update=":frmForCad:pnlForCad"
-					rendered="#{fornecedorBean.acao != 'Editar' and fornecedorBean.acao != 'Excluir'}" />
+					rendered="#{fornecedorBean.acao != 'Editar' and fornecedorBean.acao != 'Excluir' and loginBean.funcionarioLogin.funcao != 'Balconista'}" />
 				<p:commandButton value="Salvar"
 					actionListener="#{fornecedorBean.salvar}"
 					update=":messages :frmForCad:pnlForCad"
-					rendered="#{fornecedorBean.acao != 'Editar' and fornecedorBean.acao != 'Excluir'}" />
+					rendered="#{fornecedorBean.acao != 'Editar' and fornecedorBean.acao != 'Excluir' and loginBean.funcionarioLogin.funcao != 'Balconista'}" />
 
 				<p:commandButton value="Editar"
 					actionListener="#{fornecedorBean.editar}" update=":messages"
-					rendered="#{fornecedorBean.acao == 'Editar'}" />
+					rendered="#{fornecedorBean.acao == 'Editar' and loginBean.funcionarioLogin.funcao != 'Balconista'}" />
 				<p:commandButton value="Excluir"
 					actionListener="#{fornecedorBean.excluir}" update=":messages"
-					rendered="#{fornecedorBean.acao == 'Excluir'}" />
+					rendered="#{fornecedorBean.acao == 'Excluir' and loginBean.funcionarioLogin.funcao != 'Balconista' and loginBean.funcionarioLogin.funcao != 'Gerente'}" />
 
 				<p:button value="Listar" outcome="/paginas/fornecedorLista.xhtml" />
 			</h:panelGrid>

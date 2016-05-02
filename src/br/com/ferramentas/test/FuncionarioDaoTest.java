@@ -2,6 +2,7 @@ package br.com.ferramentas.test;
 
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import br.com.ferramentas.dao.FuncionarioDao;
@@ -74,8 +75,6 @@ public class FuncionarioDaoTest {
 
 		dao.excluir(fun1);
 
-		
-
 	}
 
 	@Test
@@ -90,6 +89,16 @@ public class FuncionarioDaoTest {
 		funcionario.setSenha("741hghg8120");
 		dao.editar(funcionario);
 
+	}
+
+	@Test
+	@Ignore
+	public void autenticar() {
+		FuncionarioDao funcionarioDao = new FuncionarioDao();
+		Funcionario funcionario = funcionarioDao.logar("125.452.125-74", "789123");
+		// System.out.println("Funcionario: " + funcionario);
+		// Teste para ver se o funcionário é nulo
+		Assert.assertNotNull(funcionario);
 	}
 
 }

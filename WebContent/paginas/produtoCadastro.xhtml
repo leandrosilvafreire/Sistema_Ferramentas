@@ -29,7 +29,7 @@
 
 			<h:panelGrid id="pnlProCad" columns="2">
 
-				
+
 
 				<p:outputLabel value="Nome " />
 				<p:inputText maxlength="50" size="30"
@@ -67,20 +67,20 @@
 			<h:panelGrid columns="5">
 				<p:commandButton value="Cancelar"
 					actionListener="#{produtoBean.novo}" update=":frmProCad:pnlProCad"
-					rendered="#{produtoBean.acao != 'Editar' and produtoBean.acao != 'Excluir'}" />
+					rendered="#{produtoBean.acao != 'Editar' and produtoBean.acao != 'Excluir' and loginBean.funcionarioLogin.funcao != 'Balconista'}" />
 
 				<p:commandButton value="Salvar"
 					actionListener="#{produtoBean.salvarPro}"
 					update=":messages :frmProCad:pnlProCad"
-					rendered="#{produtoBean.acao != 'Editar' and produtoBean.acao != 'Excluir'}" />
+					rendered="#{produtoBean.acao != 'Editar' and produtoBean.acao != 'Excluir' and loginBean.funcionarioLogin.funcao != 'Balconista'}" />
 
 				<p:commandButton value="Editar"
 					actionListener="#{produtoBean.editarPro}" update=":messages"
-					rendered="#{produtoBean.acao=='Editar'}" />
+					rendered="#{produtoBean.acao=='Editar' and loginBean.funcionarioLogin.funcao != 'Balconista'}" />
 
 				<p:commandButton value="Excluir"
 					actionListener="#{produtoBean.excluirPro}" update=":messages"
-					rendered="#{produtoBean.acao=='Excluir'}" />
+					rendered="#{produtoBean.acao=='Excluir' and loginBean.funcionarioLogin.funcao != 'Balconista' and loginBean.funcionarioLogin.funcao != 'Gerente'}" />
 
 				<p:button value="Listar" outcome="/paginas/produtoLista.xhtml" />
 			</h:panelGrid>

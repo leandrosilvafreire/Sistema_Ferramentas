@@ -31,21 +31,29 @@
 
 		<p:layoutUnit header="Menu Principal" position="west" size="200"
 			resizable="false" closable="false" collapsible="false">
-			<h:form>
-				<p:panelMenu>
+			<h:form id="frmMenuGeral">
+				<p:panelMenu id="pnlMenuGeral">
 					<p:submenu label="Arquivo">
-						<p:menuitem value="Home" outcome="/paginas/principal.xhtml" />
-						<p:menuitem value="sair" />
+						<p:menuitem value="Login" outcome="/paginas/login.xhtml"
+							rendered="#{loginBean.funcionarioLogin.funcao == null}" />
+						<p:menuitem value="Home" outcome="/paginas/principal.xhtml"
+							rendered="#{loginBean.funcionarioLogin.funcao != null}" />
+						<p:menuitem value="sair"
+							rendered="#{loginBean.funcionarioLogin.funcao != null}"
+							action="#{loginBean.sair}" />
 					</p:submenu>
-					<p:submenu label="Cadastros">
+					<p:submenu label="Cadastros"
+						rendered="#{loginBean.funcionarioLogin.funcao != null}">
 						<p:menuitem value="Fornecedores"
 							outcome="/paginas/fornecedorCadastro.xhtml" />
 						<p:menuitem value="Funcionários"
-							outcome="/paginas/funcionarioCadastro.xhtml" />
+							outcome="/paginas/funcionarioCadastro.xhtml"
+							rendered="#{loginBean.funcionarioLogin.funcao != 'Balconista'}" />
 						<p:menuitem value="Produtos"
 							outcome="/paginas/produtoCadastro.xhtml" />
 					</p:submenu>
-					<p:submenu label="Vendas">
+					<p:submenu label="Vendas"
+						rendered="#{loginBean.funcionarioLogin.funcao != null}">
 						<p:menuitem value="Novo" outcome="/paginas/vendaCadastro.xhtml" />
 					</p:submenu>
 
