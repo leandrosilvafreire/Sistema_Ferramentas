@@ -3,6 +3,7 @@ package br.com.ferramentas.bean;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+
 import br.com.ferramentas.dao.FuncionarioDao;
 import br.com.ferramentas.domain.Funcionario;
 import br.com.ferramentas.util.FacesUtil;

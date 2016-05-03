@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import br.com.ferramentas.dao.FuncionarioDao;
@@ -27,6 +28,9 @@ public class VendaBean {
 	private Venda vendaCadastro;
 
 	private List<Item> itensLista;
+
+	@ManagedProperty(value = "#{loginBean}")
+	private LoginBean loginBean;
 
 	public List<Produto> getProdutoLista() {
 		return produtoLista;
@@ -65,6 +69,14 @@ public class VendaBean {
 
 	public void setVendaCadastro(Venda vendaCadastro) {
 		this.vendaCadastro = vendaCadastro;
+	}
+
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
 	}
 
 	public void carregarPecas() {
@@ -136,7 +148,7 @@ public class VendaBean {
 		vendaCadastro.setHorario(new Date());
 
 		FuncionarioDao funcionarioDao = new FuncionarioDao();
-		Funcionario funcionario = funcionarioDao.bucarPorCodigo(6L);
+		Funcionario funcionario = funcionarioDao.bucarPorCodigo(loginBean.getFuncionarioLogin().getCodigo());
 		vendaCadastro.setFuncionario(funcionario);
 
 	}
@@ -146,10 +158,10 @@ public class VendaBean {
 			VendaDao vendaDao = new VendaDao();
 			Long codigoVenda = vendaDao.salvar(vendaCadastro);
 			Venda vendaFk = vendaDao.bucarPorCodigo(codigoVenda);
-			
-			for(Item item : itensLista){
+
+			for (Item item : itensLista) {
 				item.setVenda(vendaFk);
-				
+
 				ItemDao itemDao = new ItemDao();
 				itemDao.salvar(item);
 			}
