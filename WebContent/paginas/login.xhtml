@@ -29,9 +29,8 @@
 			</h:panelGrid>
 
 			<h:panelGrid columns="1">
-				<p:commandButton value="Entrar"
-					update=":messages :frmMenuGeral:pnlMenuGeral"
-					actionListener="#{loginBean.logar}" />
+				<p:commandButton value="Entrar" update=":conteudo"
+					action="#{loginBean.logar}" />
 			</h:panelGrid>
 
 		</h:form>
