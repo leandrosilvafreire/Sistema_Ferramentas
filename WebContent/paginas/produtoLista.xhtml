@@ -37,7 +37,7 @@
 					<h:commandLink>
 						<p:graphicImage library="imagens" name="pdf.png" width="24" />
 						<p:dataExporter type="pdf" target="tblProdutos"
-							fileName="produtos" encoding="ISO-8859-1"/>
+							fileName="produtos" encoding="ISO-8859-1" />
 					</h:commandLink>
 
 					<h:commandLink>
@@ -61,7 +61,9 @@
 
 				<p:column headerText="Preço" sortBy="#{produto.preco}"
 					style="width: 8%">
-					<h:outputText value="#{produto.preco}" />
+					<h:outputText value="R$ #{produto.preco}">
+						<f:convertNumber pattern="0.00"/>
+					</h:outputText>
 				</p:column>
 
 				<p:column headerText="Quantidade" style="width: 8%">

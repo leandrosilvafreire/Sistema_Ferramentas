@@ -15,6 +15,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -41,6 +42,7 @@ public class Produto {
 	@NotNull(message = "O campo preço é obrigatório!")
 	@DecimalMin(value = "0.01", message = "Informe um valor válido!")
 	@DecimalMax(value = "999999.99", message = "Informe um valor válido!")
+	@Digits(integer = 6, fraction = 2, message = "Informe um valor válido para o campo preço!")
 	@Column(name = "pro_preco", precision = 8, scale = 2, nullable = false)
 	private BigDecimal preco;
 
@@ -50,7 +52,7 @@ public class Produto {
 	@Column(name = "pro_quantidade", nullable = false)
 	private Integer quantidade;
 
-	@NotNull(message="O campo fornecedor é obrigatório!")
+	@NotNull(message = "O campo fornecedor é obrigatório!")
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "tb_fornecedor_for_id", referencedColumnName = "for_id")
 	private Fornecedor fornecedor;
@@ -125,7 +127,5 @@ public class Produto {
 			return false;
 		return true;
 	}
-	
-	
 
 }

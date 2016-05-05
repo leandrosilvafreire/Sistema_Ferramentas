@@ -16,6 +16,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "tb_vendas")
@@ -38,6 +39,9 @@ public class Venda {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "tb_funcionarios_fun_id", referencedColumnName = "fun_id", nullable = false)
 	private Funcionario funcionario;
+
+	@Transient
+	private Integer quantidadeTotal;
 
 	public Long getCodigo() {
 		return codigo;
@@ -71,6 +75,14 @@ public class Venda {
 		this.funcionario = funcionario;
 	}
 
+	public Integer getQuantidadeTotal() {
+		return quantidadeTotal;
+	}
+
+	public void setQuantidadeTotal(Integer quantidadeTotal) {
+		this.quantidadeTotal = quantidadeTotal;
+	}
+
 	@Override
 	public String toString() {
 		return "Venda [codigo=" + codigo + ", horario=" + horario + ", valorTotal=" + valorTotal + ", funcionario="
@@ -101,7 +113,5 @@ public class Venda {
 			return false;
 		return true;
 	}
-	
-	
 
 }

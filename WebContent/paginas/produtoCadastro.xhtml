@@ -40,14 +40,17 @@
 
 				<p:outputLabel value="preço" />
 				<p:inputText size="25" value="#{produtoBean.produtoCadastro.preco}"
-					readonly="#{produtoBean.acao=='Excluir'}">
+					readonly="#{produtoBean.acao=='Excluir'}"
+					converterMessage="Informe um valor válido para o campo preço!">
+					<f:convertNumber />
 					<f:validateBean />
 				</p:inputText>
 
 				<p:outputLabel value="Quantidade" />
 				<p:inputText size="20"
 					value="#{produtoBean.produtoCadastro.quantidade}"
-					readonly="#{produtoBean.acao=='Excluir'}">
+					readonly="#{produtoBean.acao=='Excluir'}"
+					converterMessage="Informe um valor válido para o campo quantidade!">
 					<f:validateBean />
 				</p:inputText>
 
