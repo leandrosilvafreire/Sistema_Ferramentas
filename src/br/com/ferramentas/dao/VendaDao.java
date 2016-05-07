@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import br.com.ferramentas.domain.Venda;
+import br.com.ferramentas.filter.VendaFiltro;
 import br.com.ferramentas.util.HibernateUtil;
 
 public class VendaDao {
@@ -104,6 +105,39 @@ public class VendaDao {
 			sessao.close();
 		}
 
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Venda> buscarData(VendaFiltro filtro) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+
+		List<Venda> vendas = null;
+		StringBuilder sql = new StringBuilder();
+		sql.append("select venda from Venda venda ");
+
+		if (filtro.getDataInicio() != null && filtro.getDataFim() != null) {
+			sql.append("where venda.horario between :dataInicio and :dataFim ");
+		}
+
+		sql.append("order by venda.horario ");
+
+		try {
+			Query consulta = sessao.createQuery(sql.toString());
+
+			if (filtro.getDataInicio() != null && filtro.getDataFim() != null) {
+				consulta.setDate("dataInicio", filtro.getDataInicio());
+				consulta.setDate("dataFim", filtro.getDataFim());
+			}
+
+			vendas = consulta.list();
+
+		} catch (RuntimeException ex) {
+			throw ex;
+		} finally {
+			sessao.close();
+		}
+
+		return vendas;
 	}
 
 }

@@ -17,6 +17,7 @@ import br.com.ferramentas.domain.Funcionario;
 import br.com.ferramentas.domain.Item;
 import br.com.ferramentas.domain.Produto;
 import br.com.ferramentas.domain.Venda;
+import br.com.ferramentas.filter.VendaFiltro;
 import br.com.ferramentas.util.FacesUtil;
 
 @ManagedBean
@@ -31,6 +32,9 @@ public class VendaBean {
 
 	@ManagedProperty(value = "#{loginBean}")
 	private LoginBean loginBean;
+
+	private VendaFiltro consultaFiltro;
+	private List<Venda> vendaListaConsulta;
 
 	public List<Produto> getProdutoLista() {
 		return produtoLista;
@@ -78,6 +82,27 @@ public class VendaBean {
 
 	public void setLoginBean(LoginBean loginBean) {
 		this.loginBean = loginBean;
+	}
+
+	public VendaFiltro getConsultaFiltro() {
+
+		if (consultaFiltro == null) {
+			consultaFiltro = new VendaFiltro();
+		}
+
+		return consultaFiltro;
+	}
+
+	public void setConsultaFiltro(VendaFiltro consultaFiltro) {
+		this.consultaFiltro = consultaFiltro;
+	}
+
+	public List<Venda> getVendaListaConsulta() {
+		return vendaListaConsulta;
+	}
+
+	public void setVendaListaConsulta(List<Venda> vendaListaConsulta) {
+		this.vendaListaConsulta = vendaListaConsulta;
 	}
 
 	public void carregarPecas() {
@@ -142,7 +167,6 @@ public class VendaBean {
 			itensLista.remove(posicaoSelecionada);
 			vendaCadastro.setValorTotal(vendaCadastro.getValorTotal().subtract(item.getValorParcial()));
 			vendaCadastro.setQuantidadeTotal(vendaCadastro.getQuantidadeTotal() - item.getQuantidade());
-			
 
 		}
 
@@ -177,6 +201,22 @@ public class VendaBean {
 		} catch (RuntimeException ex) {
 			FacesUtil.addMsgErro("Erro ao tentar cadastrar a venda! " + ex.getMessage());
 		}
+	}
+
+	public void consultarVenda() {
+		
+	try {
+		VendaDao vendaDao = new VendaDao();
+		vendaListaConsulta = vendaDao.buscarData(consultaFiltro);
+		
+		for(Venda venda : vendaListaConsulta){
+			System.out.println(venda);
+		}
+		
+	} catch (RuntimeException ex) {
+		FacesUtil.addMsgErro("Erro ao tentar consultar as vendas: " + ex.getMessage());
+	}
+		
 	}
 
 }

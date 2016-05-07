@@ -55,6 +55,9 @@
 					<p:submenu label="Vendas"
 						rendered="#{loginBean.funcionarioLogin.funcao != null}">
 						<p:menuitem value="Novo" outcome="/paginas/vendaCadastro.xhtml" />
+						<p:menuitem value="Consulta"
+							outcome="/paginas/vendaConsulta.xhtml"
+							rendered="#{loginBean.funcionarioLogin.funcao != 'Balconista'}" />
 					</p:submenu>
 
 				</p:panelMenu>

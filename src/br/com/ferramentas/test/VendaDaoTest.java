@@ -1,17 +1,18 @@
 package br.com.ferramentas.test;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;
-
 import br.com.ferramentas.dao.FuncionarioDao;
 import br.com.ferramentas.dao.VendaDao;
 import br.com.ferramentas.domain.Funcionario;
 import br.com.ferramentas.domain.Venda;
+import br.com.ferramentas.filter.VendaFiltro;
 
 public class VendaDaoTest {
 
@@ -103,6 +104,26 @@ public class VendaDaoTest {
 		
 		
 
+	}
+	
+	@Test
+	@Ignore
+	public void buscarDate() throws java.text.ParseException{
+		
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		
+		VendaFiltro filtro = new VendaFiltro();
+		filtro.setDataInicio(formato.parse("01/05/2016"));
+		filtro.setDataFim(formato.parse("06/05/2016"));
+		
+		VendaDao vendaDao = new VendaDao();
+		List<Venda> vendas = vendaDao.buscarData(filtro);
+		
+		for(Venda venda : vendas){
+			System.out.println(venda);
+		}
+		
+		
 	}
 
 }
